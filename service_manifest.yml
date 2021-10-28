@@ -1,0 +1,23 @@
+name: ELFPARSER
+version: $SERVICE_TAG
+description: >-
+  This service uses the open source tool elfparser to score and detect capabilities in an ELF file.
+
+accepts: executable/linux
+rejects: empty|metadata/.*
+
+stage: CORE
+category: Static Analysis
+
+file_required: true
+timeout: 60
+disable_cache: false
+
+enabled: true
+is_external: false
+licence_count: 0
+
+docker_config:
+  image: ${REGISTRY}cccs/assemblyline-service-elfparser:$SERVICE_TAG
+  cpu_cores: 1
+  ram_mb: 512
