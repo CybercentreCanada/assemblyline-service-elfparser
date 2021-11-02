@@ -21,14 +21,16 @@ class ELFPARSER(ServiceBase):
 
         cmd = ["./elfparser-cli-1.4.0", "-c", "-r", "-f", request.file_path]
         proc = subprocess.run(cmd, capture_output=True, text=True)
-        if proc.returncode != 0:
+        if proc.returncode != 0 or len(proc.stderr) != 0:
             res = ResultSection("This file looks like an ELF but failed loading.")
-            sub_res = ResultSection("Output")
-            sub_res.add_lines(proc.stdout)
-            res.add_subsection(sub_res)
-            sub_res = ResultSection("Error")
-            sub_res.add_lines(proc.stderr)
-            res.add_subsection(sub_res)
+            if len(proc.stdout) > 0:
+                sub_res = ResultSection("Output")
+                sub_res.add_line(proc.stdout)
+                res.add_subsection(sub_res)
+            if len(proc.stderr) > 0:
+                sub_res = ResultSection("Error")
+                sub_res.add_line(proc.stderr)
+                res.add_subsection(sub_res)
             self.file_res.add_section(res)
             return
 
