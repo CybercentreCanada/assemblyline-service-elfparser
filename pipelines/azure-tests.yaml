@@ -24,10 +24,10 @@ jobs:
           versionSpec: "$(python.version)"
       - script: |
           [ ! -d "$(pwd)/tests" ] && echo "No tests found" && exit
-          sudo apt update
-          sudo apt install -y libfuzzy-dev libfuzzy2
+          sudo apt-get update
+          sudo apt-get install -y libfuzzy-dev libfuzzy2
           if [ -f $(pwd)/pkglist.txt ]; then
-            sudo apt install -y < $(pwd)/pkglist.txt
+            sudo apt-get install -y < $(pwd)/pkglist.txt
             sudo rm -rf /var/lib/apt/lists/*
           fi
           sudo env "PATH=$PATH" python -m pip install -U --no-cache-dir assemblyline assemblyline_v4_service
@@ -37,12 +37,9 @@ jobs:
         displayName: Setup environment
       - script: |
           [ ! -d "$(pwd)/tests" ] && echo "No tests found" && exit
-          #TODO: Remove the echo after finding out what --cov needs
-          echo pytest -p no:cacheprovider --durations=10 -rsx -vv --cov-report=xml --cov=elfparser
-          echo COVERAGE_FILE=/tmp/coverage_db pytest -p no:cacheprovider --durations=10 -rsx -vv --cov-report=xml:/tmp/cov-report/out --cov=elfparser
+          pytest -p no:cacheprovider --durations=10 -rsx -vv --cov-report=xml --cov=elfparser
         displayName: Test
       - script: |
           [ ! -d "$(pwd)/tests" ] && echo "No tests found" && exit
-          #TODO check that this uploads at the right place
-          echo python -m codecov
+          python -m codecov
         displayName: Upload Coverage
