@@ -36,7 +36,7 @@ stages:
               #TODO: Remove the echo
               echo docker run -v $(pwd)/tests/:/opt/al_service/tests/ cccs/${BUILD_REPOSITORY_NAME##*/}:latest bash -c 'pytest -p no:cacheprovider'
             displayName: Test containers
-            - script: |
+          - script: |
               #TODO: Remove the echo
               echo docker push cccs/${BUILD_REPOSITORY_NAME##*/} --all-tags
             displayName: Deploy to Docker Hub
