@@ -37,7 +37,7 @@ jobs:
         displayName: Setup environment
       - script: |
           [ ! -d "$(pwd)/tests" ] && echo "No tests found" && exit
-          pytest -p no:cacheprovider --durations=10 -rsx -vv --cov-report=xml --cov=elfparser
+          python -m pytest -p no:cacheprovider --durations=10 -rsx -vv --cov-report=xml --cov=elfparser
         displayName: Test
       - script: |
           [ ! -d "$(pwd)/tests" ] && echo "No tests found" && exit
