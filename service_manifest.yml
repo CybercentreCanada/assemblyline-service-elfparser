@@ -17,6 +17,133 @@ enabled: true
 is_external: false
 licence_count: 0
 
+heuristics:
+  - description: File Functions entries
+    filetype: "executable/linux"
+    heur_id: 1
+    name: File Functions
+    score: 15
+
+  - description: Network Functions entries
+    filetype: "executable/linux"
+    heur_id: 2
+    name: Network Functions
+    score: 5
+
+  - description: Process Manipulation entries
+    filetype: "executable/linux"
+    heur_id: 3
+    name: Process Manipulation
+    score: 15
+
+  - description: Pipe Functions entries
+    filetype: "executable/linux"
+    heur_id: 4
+    name: Pipe Functions
+    score: 15
+
+  - description: Random Functions entries
+    filetype: "executable/linux"
+    heur_id: 5
+    name: Random Functions
+    score: 1
+
+  - description: Information Gathering entries
+    filetype: "executable/linux"
+    heur_id: 6
+    name: Information Gathering
+    score: 50
+
+  - description: Environment Variables entries
+    filetype: "executable/linux"
+    heur_id: 7
+    name: Environment Variables
+    score: 75
+
+  - description: Permissions entries
+    filetype: "executable/linux"
+    heur_id: 8
+    name: Permissions
+    score: 35
+
+  - description: System Log entries
+    filetype: "executable/linux"
+    heur_id: 9
+    name: System Log
+    score: 5
+
+  - description: Packet Sniffing entries
+    filetype: "executable/linux"
+    heur_id: 10
+    name: Packet Sniffing
+    score: 20
+
+  - description: Shell entries
+    filetype: "executable/linux"
+    heur_id: 11
+    name: Shell
+    score: 100
+
+  - description: Packed entries
+    filetype: "executable/linux"
+    heur_id: 12
+    name: Packed
+    score: 100
+
+  - description: IRC entries
+    filetype: "executable/linux"
+    heur_id: 13
+    name: IRC
+    score: 50
+
+  - description: HTTP entries
+    filetype: "executable/linux"
+    heur_id: 14
+    name: HTTP
+    score: 100
+
+  - description: Compression entries
+    filetype: "executable/linux"
+    heur_id: 15
+    name: Compression
+    score: 15
+
+  - description: IP Addresses entries
+    filetype: "executable/linux"
+    heur_id: 16
+    name: IP Addresses
+    score: 20
+
+  - description: URL entries
+    filetype: "executable/linux"
+    heur_id: 17
+    name: URL
+    score: 5
+
+  - description: Function Hooking entries
+    filetype: "executable/linux"
+    heur_id: 18
+    name: Function Hooking
+    score: 100
+
+  - description: Anti-Debug entries
+    filetype: "executable/linux"
+    heur_id: 19
+    name: Anti-Debug
+    score: 105
+
+  - description: Dropper entries
+    filetype: "executable/linux"
+    heur_id: 20
+    name: Dropper
+    score: 500
+
+  - description: File Path entries
+    filetype: "executable/linux"
+    heur_id: 21
+    name: File Path
+    score: 5
+
 docker_config:
   image: ${REGISTRY}cccs/assemblyline-service-elfparser:$SERVICE_TAG
   cpu_cores: 1

@@ -14,7 +14,7 @@
         "service_debug_info": null
     },
     "result": {
-        "score": 0,
+        "score": 1225,
         "sections": [
             {
                 "body": "Total score: 196",
@@ -54,7 +54,14 @@
                 "classification": "TLP:W",
                 "body_format": "TEXT",
                 "depth": 1,
-                "heuristic": null,
+                "heuristic": {
+                    "heur_id": 1,
+                    "score": 15,
+                    "attack_ids": [],
+                    "signatures": {},
+                    "frequency": 1,
+                    "score_map": {}
+                },
                 "tags": {},
                 "title_text": "File Functions",
                 "zeroize_on_tag_safe": false,
@@ -65,7 +72,14 @@
                 "classification": "TLP:W",
                 "body_format": "TEXT",
                 "depth": 1,
-                "heuristic": null,
+                "heuristic": {
+                    "heur_id": 6,
+                    "score": 150,
+                    "attack_ids": [],
+                    "signatures": {},
+                    "frequency": 3,
+                    "score_map": {}
+                },
                 "tags": {},
                 "title_text": "Information Gathering",
                 "zeroize_on_tag_safe": false,
@@ -76,7 +90,14 @@
                 "classification": "TLP:W",
                 "body_format": "TEXT",
                 "depth": 1,
-                "heuristic": null,
+                "heuristic": {
+                    "heur_id": 7,
+                    "score": 150,
+                    "attack_ids": [],
+                    "signatures": {},
+                    "frequency": 2,
+                    "score_map": {}
+                },
                 "tags": {},
                 "title_text": "Environment Variables",
                 "zeroize_on_tag_safe": false,
@@ -87,7 +108,14 @@
                 "classification": "TLP:W",
                 "body_format": "TEXT",
                 "depth": 1,
-                "heuristic": null,
+                "heuristic": {
+                    "heur_id": 8,
+                    "score": 35,
+                    "attack_ids": [],
+                    "signatures": {},
+                    "frequency": 1,
+                    "score_map": {}
+                },
                 "tags": {},
                 "title_text": "Permissions",
                 "zeroize_on_tag_safe": false,
@@ -98,7 +126,14 @@
                 "classification": "TLP:W",
                 "body_format": "TEXT",
                 "depth": 1,
-                "heuristic": null,
+                "heuristic": {
+                    "heur_id": 11,
+                    "score": 300,
+                    "attack_ids": [],
+                    "signatures": {},
+                    "frequency": 3,
+                    "score_map": {}
+                },
                 "tags": {},
                 "title_text": "Shell",
                 "zeroize_on_tag_safe": false,
@@ -109,7 +144,14 @@
                 "classification": "TLP:W",
                 "body_format": "TEXT",
                 "depth": 1,
-                "heuristic": null,
+                "heuristic": {
+                    "heur_id": 12,
+                    "score": 200,
+                    "attack_ids": [],
+                    "signatures": {},
+                    "frequency": 2,
+                    "score_map": {}
+                },
                 "tags": {},
                 "title_text": "Packed",
                 "zeroize_on_tag_safe": false,
@@ -120,7 +162,14 @@
                 "classification": "TLP:W",
                 "body_format": "TEXT",
                 "depth": 1,
-                "heuristic": null,
+                "heuristic": {
+                    "heur_id": 13,
+                    "score": 150,
+                    "attack_ids": [],
+                    "signatures": {},
+                    "frequency": 3,
+                    "score_map": {}
+                },
                 "tags": {},
                 "title_text": "IRC",
                 "zeroize_on_tag_safe": false,
@@ -131,7 +180,14 @@
                 "classification": "TLP:W",
                 "body_format": "TEXT",
                 "depth": 1,
-                "heuristic": null,
+                "heuristic": {
+                    "heur_id": 14,
+                    "score": 100,
+                    "attack_ids": [],
+                    "signatures": {},
+                    "frequency": 1,
+                    "score_map": {}
+                },
                 "tags": {},
                 "title_text": "HTTP",
                 "zeroize_on_tag_safe": false,
@@ -142,7 +198,14 @@
                 "classification": "TLP:W",
                 "body_format": "TEXT",
                 "depth": 1,
-                "heuristic": null,
+                "heuristic": {
+                    "heur_id": 15,
+                    "score": 75,
+                    "attack_ids": [],
+                    "signatures": {},
+                    "frequency": 5,
+                    "score_map": {}
+                },
                 "tags": {},
                 "title_text": "Compression",
                 "zeroize_on_tag_safe": false,
@@ -153,7 +216,14 @@
                 "classification": "TLP:W",
                 "body_format": "TEXT",
                 "depth": 1,
-                "heuristic": null,
+                "heuristic": {
+                    "heur_id": 21,
+                    "score": 50,
+                    "attack_ids": [],
+                    "signatures": {},
+                    "frequency": 10,
+                    "score_map": {}
+                },
                 "tags": {},
                 "title_text": "File Path",
                 "zeroize_on_tag_safe": false,

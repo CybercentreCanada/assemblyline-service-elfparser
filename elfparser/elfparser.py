@@ -1,9 +1,10 @@
 import re
 import subprocess
 
+from assemblyline_v4_service.common import helper
 from assemblyline_v4_service.common.base import ServiceBase
 from assemblyline_v4_service.common.request import ServiceRequest
-from assemblyline_v4_service.common.result import Result, ResultSection
+from assemblyline_v4_service.common.result import Heuristic, Result, ResultSection
 
 
 class ELFPARSER(ServiceBase):
@@ -13,6 +14,34 @@ class ELFPARSER(ServiceBase):
     def start(self):
         self.log.info("Starting ELFPARSER")
         self.header_line = re.compile(".* - Score: (\\d+) \\[Family: (.*)\\]")
+        # Create mapping of name -> heur-id
+        """
+        fileFunctions, 15 # fopen/close, etc
+        networkFunctions, 5
+        processManipulation, 15 # execve, close, raise, etc
+        pipeFunctions, 15 #pclose, popen
+        crypto, 1 # rand() and the like
+        infoGathering, 50 # /proc/{cpuinfo,meminfo,stat}
+        envVariables, 75 # no 100 b/c getenv() is legit
+        permissions, 35 #chown, chmod
+        syslog, 5
+        packetSniff, 20 # pcap_{open,close,read,loop}
+        shell, 100 # system(). If not malicious at least identifying weak code.
+        packed, 100
+        irc, 50
+        http, 100
+        compression, 20
+        ipAddress, 20
+        url, 5
+        hooking, 100 #dlsym()
+        antidebug, 105 #elf obfuscation
+        filePath, 5
+        dropper, 500 # Finds elf headers at offsets other than 0x0. Binwalk-esq
+        """
+        heuristics = helper.get_heuristics()
+        self.heuristics = {}
+        for heuristic in heuristics.values():
+            self.heuristics[heuristic.name] = heuristic
 
     def execute(self, request: ServiceRequest):
         request.result = Result()
@@ -57,19 +86,39 @@ class ELFPARSER(ServiceBase):
             self.file_res.add_section(res)
 
         res = None
-        sub_res = None
+        sub_res_title = None
+        sub_res_lines = []
         for line in output[currentline:]:
             if line == "":
                 continue
             if res is None:
                 res = ResultSection("Capabilities")
             if line.startswith("\t\t"):
-                sub_res.add_line(line[2:])
+                sub_res_lines.append(line[2:])
             elif line.startswith("\t"):
-                if sub_res is not None:
+                if sub_res_title is not None:
+                    if sub_res_title in self.heuristics:
+                        sub_res = ResultSection(
+                            sub_res_title,
+                            heuristic=Heuristic(
+                                int(self.heuristics[sub_res_title].heur_id), frequency=len(sub_res_lines)
+                            ),
+                        )
+                    else:
+                        sub_res = ResultSection(sub_res_title)
+                    sub_res.add_lines(sub_res_lines)
                     res.add_subsection(sub_res)
-                sub_res = ResultSection(line[1:])
+                    sub_res_lines = []
+                sub_res_title = line[1:]
         if res is not None:
-            if sub_res is not None:
+            if sub_res_title is not None:
+                if sub_res_title in self.heuristics:
+                    sub_res = ResultSection(
+                        sub_res_title,
+                        heuristic=Heuristic(int(self.heuristics[sub_res_title].heur_id), frequency=len(sub_res_lines)),
+                    )
+                else:
+                    sub_res = ResultSection(sub_res_title)
+                sub_res.add_lines(sub_res_lines)
                 res.add_subsection(sub_res)
             self.file_res.add_section(res)
