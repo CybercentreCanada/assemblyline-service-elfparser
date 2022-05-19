@@ -101,7 +101,7 @@ class TestELFParser:
         # Get the assumed "correct" result of the sample
         correct_result_path = os.path.join(TEST_DIR, "results", task.file_name + ".json")
         with open(correct_result_path, "r") as f:
-            correct_result = json.loads(f.read())
+            correct_result = json.load(f)
         f.close()
 
         # Assert values of the class instance are expected

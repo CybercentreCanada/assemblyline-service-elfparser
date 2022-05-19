@@ -8,7 +8,7 @@ from assemblyline_v4_service.common.result import Result, ResultSection
 
 class ELFPARSER(ServiceBase):
     def __init__(self, config=None):
-        super(ELFPARSER, self).__init__(config)
+        super().__init__(config)
 
     def start(self):
         self.log.info("Starting ELFPARSER")
