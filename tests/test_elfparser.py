@@ -81,6 +81,7 @@ class TestELFParser:
 
     @staticmethod
     @pytest.mark.parametrize("sample", samples)
+    @pytest.mark.skip()
     def test_execute(sample):
         from assemblyline.odm.messages.task import Task as ServiceTask
         from assemblyline_v4_service.common.request import ServiceRequest
