@@ -11,7 +11,7 @@ class ELFPARSER(ServiceBase):
         super().__init__(config)
 
     def start(self):
-        self.log.info("Starting ELFPARSER")
+        self.log.debug("Starting ELFPARSER")
         self.header_line = re.compile(".* - Score: (\\d+) \\[Family: (.*)\\]")
 
     def execute(self, request: ServiceRequest):
@@ -65,6 +65,8 @@ class ELFPARSER(ServiceBase):
                 res = ResultSection("Capabilities")
             if line.startswith("\t\t"):
                 sub_res.add_line(line[2:])
+                if sub_res.title_text == "IP Addresses":
+                    sub_res.add_tag("network.static.ip", line[2:].strip())
             elif line.startswith("\t"):
                 if sub_res is not None:
                     res.add_subsection(sub_res)
