@@ -12,6 +12,7 @@ category: Static Analysis
 file_required: true
 timeout: 60
 disable_cache: false
+privileged: true
 
 enabled: true
 is_external: false
