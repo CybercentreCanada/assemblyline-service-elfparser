@@ -6,6 +6,38 @@ from assemblyline_v4_service.common.request import ServiceRequest
 from assemblyline_v4_service.common.result import Result, ResultSection
 
 
+def get_all_strings(filepath):
+    cmd = ["strings", filepath]
+    proc = subprocess.run(cmd, capture_output=True, text=True)
+    return proc.stdout.split("\n")
+
+
+def ending_in_number(s: str):
+    if s == "":
+        return False
+    if s[-1] == ".":
+        s = s[:-1]
+    if s == "":
+        return False
+    if s[-1].isdigit():
+        return True
+    return False
+
+
+def valid_ip_adjacency(ip, ss) -> bool:
+    if not ss:
+        return True
+
+    for s in ss:
+        i = s.index(ip)
+        if ending_in_number(s[:i]):
+            continue
+        if ending_in_number(s[i + len(ip) :][::-1]):
+            continue
+        return True
+    return False
+
+
 class ELFPARSER(ServiceBase):
     def __init__(self, config=None):
         super().__init__(config)
@@ -58,17 +90,29 @@ class ELFPARSER(ServiceBase):
 
         res = None
         sub_res = None
+        all_strings_in_file = None
         for line in output[currentline:]:
             if line == "":
                 continue
             if res is None:
                 res = ResultSection("Capabilities")
             if line.startswith("\t\t"):
-                sub_res.add_line(line[2:])
                 if sub_res.title_text == "IP Addresses":
-                    sub_res.add_tag("network.static.ip", line[2:].strip())
+                    if all_strings_in_file is None:
+                        all_strings_in_file = get_all_strings(request.file_path)
+                    ip = line[2:].strip()
+                    if ip in all_strings_in_file:
+                        sub_res.add_line(ip)
+                        sub_res.add_tag("network.static.ip", ip)
+                    else:
+                        containing_ip = [x for x in filter(lambda x: ip in x, all_strings_in_file)]
+                        if valid_ip_adjacency(ip, containing_ip):
+                            sub_res.add_line(ip)
+                            sub_res.add_tag("network.static.ip", ip)
+                else:
+                    sub_res.add_line(line[2:])
             elif line.startswith("\t"):
-                if sub_res is not None:
+                if sub_res is not None and sub_res.body:
                     res.add_subsection(sub_res)
                 sub_res = ResultSection(line[1:])
         if res is not None:

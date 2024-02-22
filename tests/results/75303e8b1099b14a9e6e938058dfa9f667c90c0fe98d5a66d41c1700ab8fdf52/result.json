@@ -5,7 +5,7 @@
     "sections": [
       {
         "auto_collapse": false,
-        "body": "Total score: 4",
+        "body": "Total score: 96",
         "body_config": {},
         "body_format": "TEXT",
         "classification": "TLP:C",
@@ -18,7 +18,7 @@
       },
       {
         "auto_collapse": false,
-        "body": "4 -> Hard coded IPv4 addresses",
+        "body": "30 -> Found 2+ PT_LOAD. Possible post-compilation addition of code (cryptor or packer)\n64 -> Hard coded IPv4 addresses\n2 -> File paths",
         "body_config": {},
         "body_format": "TEXT",
         "classification": "TLP:C",
@@ -44,23 +44,15 @@
       },
       {
         "auto_collapse": false,
-        "body": "37.49.230.213",
+        "body": "/usr/lib\n/usr/lib/samba",
         "body_config": {},
         "body_format": "TEXT",
         "classification": "TLP:C",
         "depth": 1,
         "heuristic": null,
         "promote_to": null,
-        "tags": {
-          "network": {
-            "static": {
-              "ip": [
-                "37.49.230.213"
-              ]
-            }
-          }
-        },
-        "title_text": "IP Addresses",
+        "tags": {},
+        "title_text": "File Path",
         "zeroize_on_tag_safe": false
       }
     ]
@@ -71,15 +63,7 @@
   },
   "results": {
     "heuristics": [],
-    "tags": {
-      "network.static.ip": [
-        {
-          "heur_id": null,
-          "signatures": [],
-          "value": "37.49.230.213"
-        }
-      ]
-    },
+    "tags": {},
     "temp_submission_data": {}
   }
 }

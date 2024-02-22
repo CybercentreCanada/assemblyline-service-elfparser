@@ -6,10 +6,12 @@
       {
         "auto_collapse": false,
         "body": null,
+        "body_config": {},
         "body_format": "TEXT",
-        "classification": "TLP:W",
+        "classification": "TLP:C",
         "depth": 0,
         "heuristic": null,
+        "promote_to": null,
         "tags": {},
         "title_text": "This file looks like an ELF but failed loading.",
         "zeroize_on_tag_safe": false
@@ -17,10 +19,12 @@
       {
         "auto_collapse": false,
         "body": "Error in parsing /tmp/5a93d676f9ac0b71f4ac3ca43a001df6fac89dba56cc8652a55cec9b84b53ab4: The file is too small to be an ELF binary\n",
+        "body_config": {},
         "body_format": "TEXT",
-        "classification": "TLP:W",
+        "classification": "TLP:C",
         "depth": 1,
         "heuristic": null,
+        "promote_to": null,
         "tags": {},
         "title_text": "Error",
         "zeroize_on_tag_safe": false
