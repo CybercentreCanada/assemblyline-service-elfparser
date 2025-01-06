@@ -1,6 +1,6 @@
 {
   "template": "https://github.com/CybercentreCanada/assemblyline-service-template.git",
-  "commit": "6a32666117e30dbfb990bfaf6e7c9eb25badd03a",
+  "commit": "99becf8ed2990a4063a5bb1f8ce878824a5a1a7b",
   "checkout": null,
   "context": {
     "cookiecutter": {
@@ -8,15 +8,15 @@
       "__svc_name": "elfparser",
       "__repository": "assemblyline-service-elfparser",
       "__pkg_name": "elfparser",
+      "class_name": "ELFPARSER",
       "short_description": "This Assemblyline service runs the elfparser application against linux executables. It will extract information from the output and format it for easy viewing in the web interface.",
-      "short_description_fr": "Ce service Assemblyline ex\u00e9cute l'application elfparser sur des ex\u00e9cutables Linux. Il extrait des informations de la sortie et les formate pour faciliter la visualisation dans l'interface web.",
+      "short_description_fr": "Ce service Assemblyline exécute l'application elfparser sur des exécutables Linux. Il extrait des informations de la sortie et les formate pour faciliter la visualisation dans l'interface web.",
       "stage": "CORE",
       "category": "Static Analysis",
       "org_name_full": "CybercentreCanada",
       "org_name_short": "cccs",
       "license": "mit",
-      "_template": "https://github.com/CybercentreCanada/assemblyline-service-template.git",
-      "class_name": "ELFPARSER"
+      "_template": "https://github.com/CybercentreCanada/assemblyline-service-template.git"
     }
   },
   "directory": null
