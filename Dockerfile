@@ -2,7 +2,7 @@ ARG branch=latest
 FROM cccs/assemblyline-v4-service-base:$branch
 
 # Python path to the service class from your service directory
-ENV SERVICE_PATH elfparser.elfparser.ELFPARSER
+ENV SERVICE_PATH=elfparser.elfparser.ELFPARSER
 
 # Install apt dependencies
 USER root
