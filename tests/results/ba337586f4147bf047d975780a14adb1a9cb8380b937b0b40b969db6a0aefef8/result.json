@@ -1,0 +1,237 @@
+{
+  "extra": {
+    "drop_file": false,
+    "score": 0,
+    "sections": [
+      {
+        "auto_collapse": false,
+        "body": "Total score: 83",
+        "body_config": {},
+        "body_format": "TEXT",
+        "classification": "TLP:C",
+        "depth": 0,
+        "heuristic": null,
+        "promote_to": null,
+        "tags": {},
+        "title_text": "Summary",
+        "zeroize_on_tag_safe": false
+      },
+      {
+        "auto_collapse": false,
+        "body": "7 -> Network functions\n20 -> Process manipulation functions\n1 -> Information gathering\n10 -> Shell commands\n4 -> HTTP functionality\n36 -> Hard coded IPv4 addresses\n5 -> File paths",
+        "body_config": {},
+        "body_format": "TEXT",
+        "classification": "TLP:C",
+        "depth": 0,
+        "heuristic": null,
+        "promote_to": null,
+        "tags": {},
+        "title_text": "Scores",
+        "zeroize_on_tag_safe": false
+      },
+      {
+        "auto_collapse": false,
+        "body": null,
+        "body_config": {},
+        "body_format": "TEXT",
+        "classification": "TLP:C",
+        "depth": 0,
+        "heuristic": null,
+        "promote_to": null,
+        "tags": {},
+        "title_text": "Capabilities",
+        "zeroize_on_tag_safe": false
+      },
+      {
+        "auto_collapse": false,
+        "body": "fclose() found\nfopen() found",
+        "body_config": {},
+        "body_format": "TEXT",
+        "classification": "TLP:C",
+        "depth": 1,
+        "heuristic": null,
+        "promote_to": null,
+        "tags": {},
+        "title_text": "File Functions",
+        "zeroize_on_tag_safe": false
+      },
+      {
+        "auto_collapse": false,
+        "body": "connect() found\ngethostbyname() found\ngethostbyname_r() found\ninet_addr() found\nrecv() found\nsendto() found\nsocket() found",
+        "body_config": {},
+        "body_format": "TEXT",
+        "classification": "TLP:C",
+        "depth": 1,
+        "heuristic": null,
+        "promote_to": null,
+        "tags": {},
+        "title_text": "Network Functions",
+        "zeroize_on_tag_safe": false
+      },
+      {
+        "auto_collapse": false,
+        "body": "execl() found\nexecve() found\nfork() found\nkill() found\nraise() found",
+        "body_config": {},
+        "body_format": "TEXT",
+        "classification": "TLP:C",
+        "depth": 1,
+        "heuristic": null,
+        "promote_to": null,
+        "tags": {},
+        "title_text": "Process Manipulation",
+        "zeroize_on_tag_safe": false
+      },
+      {
+        "auto_collapse": false,
+        "body": "rand() found\nrandom_r() found\nsrand() found\nsrandom_r() found",
+        "body_config": {},
+        "body_format": "TEXT",
+        "classification": "TLP:C",
+        "depth": 1,
+        "heuristic": null,
+        "promote_to": null,
+        "tags": {},
+        "title_text": "Random Functions",
+        "zeroize_on_tag_safe": false
+      },
+      {
+        "auto_collapse": false,
+        "body": "getpagesize() found",
+        "body_config": {},
+        "body_format": "TEXT",
+        "classification": "TLP:C",
+        "depth": 1,
+        "heuristic": null,
+        "promote_to": null,
+        "tags": {},
+        "title_text": "Information Gathering",
+        "zeroize_on_tag_safe": false
+      },
+      {
+        "auto_collapse": false,
+        "body": "sed connection abort",
+        "body_config": {},
+        "body_format": "TEXT",
+        "classification": "TLP:C",
+        "depth": 1,
+        "heuristic": null,
+        "promote_to": null,
+        "tags": {},
+        "title_text": "Shell",
+        "zeroize_on_tag_safe": false
+      },
+      {
+        "auto_collapse": false,
+        "body": "User-Agent: %s",
+        "body_config": {},
+        "body_format": "TEXT",
+        "classification": "TLP:C",
+        "depth": 1,
+        "heuristic": null,
+        "promote_to": null,
+        "tags": {},
+        "title_text": "HTTP",
+        "zeroize_on_tag_safe": false
+      },
+      {
+        "auto_collapse": false,
+        "body": "1.8.1.11\n1.9.0.6\n1.9.0.8\n1.9.2.4\n1.9.2.6\n185.239.236.172:666\n33.0.0.0\n37.0.0.0\n8.8.8.8",
+        "body_config": {},
+        "body_format": "TEXT",
+        "classification": "TLP:C",
+        "depth": 1,
+        "heuristic": null,
+        "promote_to": null,
+        "tags": {
+          "network": {
+            "static": {
+              "ip": [
+                "1.8.1.11",
+                "1.9.0.6",
+                "1.9.0.8",
+                "1.9.2.4",
+                "1.9.2.6",
+                "185.239.236.172",
+                "33.0.0.0",
+                "37.0.0.0",
+                "8.8.8.8"
+              ]
+            }
+          }
+        },
+        "title_text": "IP Addresses",
+        "zeroize_on_tag_safe": false
+      },
+      {
+        "auto_collapse": false,
+        "body": "/bin/sh\n/etc/config/hosts\n/etc/config/resolv.conf\n/etc/hosts\n/etc/resolv.conf",
+        "body_config": {},
+        "body_format": "TEXT",
+        "classification": "TLP:C",
+        "depth": 1,
+        "heuristic": null,
+        "promote_to": null,
+        "tags": {},
+        "title_text": "File Path",
+        "zeroize_on_tag_safe": false
+      }
+    ]
+  },
+  "files": {
+    "extracted": [],
+    "supplementary": []
+  },
+  "results": {
+    "heuristics": [],
+    "tags": {
+      "network.static.ip": [
+        {
+          "heur_id": null,
+          "signatures": [],
+          "value": "1.8.1.11"
+        },
+        {
+          "heur_id": null,
+          "signatures": [],
+          "value": "1.9.0.6"
+        },
+        {
+          "heur_id": null,
+          "signatures": [],
+          "value": "1.9.0.8"
+        },
+        {
+          "heur_id": null,
+          "signatures": [],
+          "value": "1.9.2.4"
+        },
+        {
+          "heur_id": null,
+          "signatures": [],
+          "value": "1.9.2.6"
+        },
+        {
+          "heur_id": null,
+          "signatures": [],
+          "value": "185.239.236.172"
+        },
+        {
+          "heur_id": null,
+          "signatures": [],
+          "value": "33.0.0.0"
+        },
+        {
+          "heur_id": null,
+          "signatures": [],
+          "value": "37.0.0.0"
+        },
+        {
+          "heur_id": null,
+          "signatures": [],
+          "value": "8.8.8.8"
+        }
+      ]
+    },
+    "temp_submission_data": {}
+  }
+}

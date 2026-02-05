@@ -1,9 +1,22 @@
 import re
 import subprocess
 
+from assemblyline.odm import IP
 from assemblyline_v4_service.common.base import ServiceBase
 from assemblyline_v4_service.common.request import ServiceRequest
 from assemblyline_v4_service.common.result import Result, ResultSection
+
+IP_VALIDATOR = IP()
+
+HEADER_LINE_RE = re.compile(".* - Score: (\\d+) \\[Family: (.*)\\]")
+
+
+def tag_is_valid(validator, value) -> bool:
+    try:
+        validator.check(value)
+    except ValueError:
+        return False
+    return True
 
 
 def get_all_strings(filepath):
@@ -38,18 +51,21 @@ def valid_ip_adjacency(ip, ss) -> bool:
     return False
 
 
+def add_ip_to_result(res: ResultSection, ip: str):
+    ip_data = (ip, 0)
+    if ":" in ip:
+        ip_data = ip.split(":", 1)
+        if not (ip_data[1].isdigit() and 0 <= int(ip_data[1]) <= 65535):
+            return
+    if not tag_is_valid(IP_VALIDATOR, ip_data[0]):
+        return
+    res.add_line(ip)
+    res.add_tag("network.static.ip", ip_data[0])
+
+
 class ELFPARSER(ServiceBase):
-    def __init__(self, config=None):
-        super().__init__(config)
-
-    def start(self):
-        self.log.debug("Starting ELFPARSER")
-        self.header_line = re.compile(".* - Score: (\\d+) \\[Family: (.*)\\]")
-
     def execute(self, request: ServiceRequest):
         request.result = Result()
-        self.file_res = request.result
-        self.request = request
 
         cmd = ["./elfparser-cli-1.4.0", "-c", "-r", "-f", request.file_path]
         proc = subprocess.run(cmd, capture_output=True, text=True)
@@ -63,18 +79,18 @@ class ELFPARSER(ServiceBase):
                 sub_res = ResultSection("Error")
                 sub_res.add_line(proc.stderr)
                 res.add_subsection(sub_res)
-            self.file_res.add_section(res)
+            request.result.add_section(res)
             return
 
         output = proc.stdout.split("\n")
-        m = self.header_line.match(output[0])
+        m = HEADER_LINE_RE.match(output[0])
         score = m.group(1)
         family = m.group(2)
         res = ResultSection("Summary")
         res.add_line(f"Total score: {score}")
         if family != "Undetermined":
             res.add_line(f"Familiy: {family}")
-        self.file_res.add_section(res)
+        request.result.add_section(res)
 
         currentline = 2
         res = None
@@ -86,7 +102,7 @@ class ELFPARSER(ServiceBase):
                 res = ResultSection("Scores")
             res.add_line(line)
         if res is not None:
-            self.file_res.add_section(res)
+            request.result.add_section(res)
 
         res = None
         sub_res = None
@@ -102,13 +118,11 @@ class ELFPARSER(ServiceBase):
                         all_strings_in_file = get_all_strings(request.file_path)
                     ip = line[2:].strip()
                     if ip in all_strings_in_file:
-                        sub_res.add_line(ip)
-                        sub_res.add_tag("network.static.ip", ip)
+                        add_ip_to_result(sub_res, ip)
                     else:
                         containing_ip = [x for x in filter(lambda x: ip in x, all_strings_in_file)]
                         if valid_ip_adjacency(ip, containing_ip):
-                            sub_res.add_line(ip)
-                            sub_res.add_tag("network.static.ip", ip)
+                            add_ip_to_result(sub_res, ip)
                 else:
                     sub_res.add_line(line[2:])
             elif line.startswith("\t"):
@@ -118,4 +132,4 @@ class ELFPARSER(ServiceBase):
         if res is not None:
             if sub_res is not None:
                 res.add_subsection(sub_res)
-            self.file_res.add_section(res)
+            request.result.add_section(res)
